@@ -2,7 +2,7 @@
 module.exports = {
   'env': {
     'browser': true,
-    'es2021': true,
+    'es2021': true
   },
   'extends': [
     'eslint:recommended',
@@ -12,10 +12,10 @@ module.exports = {
   'parser': '@typescript-eslint/parser',
   'parserOptions': {
     'ecmaFeatures': {
-      'jsx': true,
+      'jsx': true
     },
     'ecmaVersion': 13,
-    'sourceType': 'module',
+    'sourceType': 'module'
   },
   'plugins': [
     'react',
@@ -54,11 +54,11 @@ module.exports = {
     'comma-dangle': [
       'error', {
         'arrays': 'always',
-        'objects': 'always',
+        'objects': 'never',
         'imports': 'never',
         'exports': 'never',
-        'functions': 'never',
+        'functions': 'never'
       },
-    ],
-  },
+    ]
+  }
 };
