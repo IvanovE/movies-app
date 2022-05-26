@@ -6,7 +6,7 @@ export const text = {
   sign: 'Sign In',
   colorMode: 'Color Mode',
   goodReviews: 'Good Reviews',
-  kinoposikRating: 'Rating Kinopoisk',
+  kinopoiskRating: 'Rating Kinopoisk',
   userRating: 'User Rating',
   kinopubRating: 'Rating Kinopub',
   createdBy: 'Created by Ivanov'

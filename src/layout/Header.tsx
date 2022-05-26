@@ -18,6 +18,7 @@ import { RiPlayList2Fill } from 'react-icons/ri';
 import { GoSignIn } from 'react-icons/go';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { text } from '../constants/constants';
+import { NavIcon } from '../components/NavIcon';
 
 export const Header = () => {
   const { toggleColorMode } = useColorMode();
@@ -25,8 +26,8 @@ export const Header = () => {
   const bg = useColorModeValue('cyan.600', 'cyan.900');
 
   return (
-    <Box w='100%' bg={bg} py={4} position='sticky' top={0}>
-      <Container maxW='container.xl' display='flex' justifyContent='space-between'>
+    <Box w='100%' position='sticky' bg={bg} py={4} top={0}>
+      <Container maxW='container.xl' display='flex'>
         <Link to='/'>
           <Heading as='h2' size='lg' mr={6}>{text.name}</Heading>
         </Link>
@@ -45,30 +46,27 @@ export const Header = () => {
           />
         </InputGroup>
         <Box display='flex' gap={2}>
-          <Tooltip label={text.movies}>
-            <Link to='/movies'>
-              <IconButton
-                aria-label='movies'
-                bg={bg}
-                icon={<RiPlayList2Fill />} />
-            </Link>
-          </Tooltip>
-          <Tooltip label={text.favourites}>
-            <Link to='/favourites'>
-              <IconButton
-                aria-label='favourites'
-                bg={bg}
-                icon={<MdFavorite />} />
-            </Link>
-          </Tooltip>
-          <Tooltip label={text.sign}>
-            <Link to='/sign'>
-              <IconButton
-                aria-label='sign'
-                bg={bg}
-                icon={<GoSignIn />} />
-            </Link>
-          </Tooltip>
+          <NavIcon
+            label={text.movies}
+            ariaLabel={'movies'}
+            icon={<RiPlayList2Fill />}
+            linkTo={'/movies'}
+            background={bg}
+          />
+          <NavIcon
+            label={text.favourites}
+            ariaLabel={'favourites'}
+            icon={<MdFavorite />}
+            linkTo={'/favourites'}
+            background={bg}
+          />
+          <NavIcon
+            label={text.sign}
+            ariaLabel={'sign'}
+            icon={<GoSignIn />}
+            linkTo={'/sign'}
+            background={bg}
+          />
           <Tooltip label={text.colorMode}>
             <IconButton
               aria-label='color-mode'

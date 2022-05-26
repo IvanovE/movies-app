@@ -1,58 +1,49 @@
 import React from 'react';
 import {
-  Box,
+  Flex,
   Heading,
   Image,
-  CircularProgress,
-  CircularProgressLabel,
-  Text,
-  Flex,
   Stack
 } from '@chakra-ui/react';
 import welcomeImage from '../assets/welcomeImage.jpg';
+import { CircularProgressBar } from '../components/CircularProgressBar';
 import { text } from '../constants/constants';
+
+const sx = {
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    height: '15rem',
+    width: '100%',
+    objectFit: 'cover',
+    marginBottom: '2rem'
+  },
+  heading: {
+    marginBottom: '5rem',
+    textAlign: 'center'
+  },
+  stack: {
+    justifyContent: 'center',
+    width: '100%'
+  }
+};
 
 export const Welcome = () => {
   return (
-    <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-      <Image src={welcomeImage} alt='Welcome image' h='15rem' w='100%' objectFit='cover' mb={15} />
-      <Heading as='h1' mb={20} textAlign='center'>
+    <Flex sx={sx.container}>
+      <Image src={welcomeImage} alt='Welcome image' sx={sx.image} />
+      <Heading as='h1' sx={sx.heading}>
         {text.mainTitle}
       </Heading>
-      <Stack justifyContent='center' width='100%' direction='row' spacing={10}>
-        <Flex direction='column' align='center' justify='center'>
-          <CircularProgress value={90} color='blue.400' size='150px'>
-            <CircularProgressLabel>90%</CircularProgressLabel>
-          </CircularProgress>
-          <Text fontSize='3xl'>
-            {text.goodReviews}
-          </Text>
-        </Flex>
-        <Flex direction='column' align='center' justify='center'>
-          <CircularProgress value={94} color='blue.400' size='150px'>
-            <CircularProgressLabel>94%</CircularProgressLabel>
-          </CircularProgress>
-          <Text fontSize='3xl'>
-            {text.kinoposikRating}
-          </Text>
-        </Flex>
-        <Flex direction='column' align='center' justify='center'>
-          <CircularProgress value={89} color='blue.400' size='150px'>
-            <CircularProgressLabel>89%</CircularProgressLabel>
-          </CircularProgress>
-          <Text fontSize='3xl'>
-            {text.kinopubRating}
-          </Text>
-        </Flex>
-        <Flex flexDirection='column' align='center' justify='center'>
-          <CircularProgress value={99} color='blue.400' size='150px'>
-            <CircularProgressLabel>99%</CircularProgressLabel>
-          </CircularProgress>
-          <Text fontSize='3xl'>
-            {text.userRating}
-          </Text>
-        </Flex>
+      <Stack sx={sx.stack} direction='row' spacing={10}>
+        <CircularProgressBar color='blue.400' size='150px' value={90} text={text.goodReviews} />
+        <CircularProgressBar color='blue.400' size='150px' value={94} text={text.kinopoiskRating} />
+        <CircularProgressBar color='blue.400' size='150px' value={89} text={text.kinopubRating} />
+        <CircularProgressBar color='blue.400' size='150px' value={99} text={text.userRating} />
       </Stack>
-    </Box>
+    </Flex>
   );
 };
