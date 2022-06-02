@@ -6,6 +6,12 @@ import { Link, useHistory } from 'react-router-dom';
 import { signUp } from '../store/slices/authSlice';
 import { useAppDispatch } from '../store/store';
 import { text } from '../constants/text';
+import {
+  passwordValidation,
+  passwordConfirmValidation,
+  emailValidation,
+  usernameValidation
+} from '../utils/validation';
 
 type FormData = {
   email: string;
@@ -91,10 +97,7 @@ export const SignUp = () => {
           <Controller 
             name='email'
             control={control}
-            rules={{
-              required: true,
-              pattern: /^\S+@\S+\.\S+$/
-            }}
+            rules={emailValidation}
             render={({ field }) =>
               <Input
                 variant='outline'
@@ -114,9 +117,7 @@ export const SignUp = () => {
           <Controller
             name='username'
             control={control}
-            rules={{
-              required: true
-            }}
+            rules={usernameValidation}
             render={({ field }) =>
               <Input
                 variant='outline'
@@ -135,10 +136,7 @@ export const SignUp = () => {
           <Controller
             name='password'
             control={control}
-            rules={{
-              required: true,
-              minLength: 6
-            }}
+            rules={passwordValidation}
             render={({ field }) =>
               <Input
                 variant='outline'
@@ -159,9 +157,7 @@ export const SignUp = () => {
           <Controller
             name='confirmPassword'
             control={control}
-            rules={{
-              required: true
-            }}
+            rules={passwordConfirmValidation}
             render={({ field }) =>
               <Input
                 variant='outline'

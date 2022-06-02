@@ -16,8 +16,8 @@ export function App() {
       <Layout>
         <Switch>
           <Route exact path='/' component={Welcome} />
-          <Route exact path='/sign-in' component={SignIn} />
-          <Route exact path='/sign-up' component={SignUp} />
+          <Route path='/sign-in' component={SignIn} />
+          <Route path='/sign-up' component={SignUp} />
         </Switch>
       </Layout>
     </Router>

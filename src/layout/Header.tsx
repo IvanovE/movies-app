@@ -3,11 +3,9 @@ import {
   Box,
   Container,
   Heading,
-  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
-  Tooltip,
   useColorMode,
   useColorModeValue
 } from '@chakra-ui/react';
@@ -28,6 +26,8 @@ const pathsToRedirect = [
   '/favourites',
 ];
 
+
+
 export const Header = () => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(auth.isSignedIn);
@@ -42,6 +42,50 @@ export const Header = () => {
     if (pathsToRedirect.includes(pathname)) {
       history.replace('/movies');
     }
+  };
+
+  const navigationConfig = {
+    authorized: [
+      {
+        label: text.favourites,
+        ariaLabel: 'favourites',
+        icon: <MdFavorite/>,
+        linkTo: '/favourites',
+        background: bg
+      },
+      {
+        label: text.signOut,
+        ariaLabel: 'sign-out',
+        icon: <ImExit />,
+        background: bg,
+        onClick: exit
+      },
+    ],
+    notAuthorized: [
+      {
+        label: text.signIn,
+        ariaLabel: 'sign-in',
+        icon: <GoSignIn />,
+        linkTo: '/sign-in',
+        background: bg
+      },
+    ],
+    renderAnyway: [
+      {
+        label: text.movies,
+        ariaLabel: 'movies',
+        icon: <RiPlayList2Fill />,
+        linkTo: '/movies',
+        background: bg
+      },
+      {
+        label: text.colorMode,
+        ariaLabel: 'color-mode',
+        background: bg,
+        icon: <SwitchIcon />,
+        onClick: toggleColorMode
+      },
+    ]
   };
 
   return (
@@ -65,48 +109,19 @@ export const Header = () => {
           />
         </InputGroup>
         <Box display='flex' gap={2}>
-          <NavIcon
-            label={text.movies}
-            ariaLabel={'movies'}
-            icon={<RiPlayList2Fill />}
-            linkTo={'/movies'}
-            background={bg}
-          />
-          { isAuthenticated &&
-            <>
-              <NavIcon
-                label={text.favourites}
-                ariaLabel={'favourites'}
-                icon={<MdFavorite/>}
-                linkTo={'/favourites'}
-                background={bg}
-              />
-              <NavIcon
-                label={text.signOut}
-                ariaLabel={'sign-out'}
-                icon={<ImExit />}
-                background={bg}
-                onClick={exit}
-              />
-            </>
+          {isAuthenticated &&
+              navigationConfig.authorized.map((iconConf) => {
+                return <NavIcon key={iconConf.ariaLabel} {...iconConf} />;
+              })
           }
           {!isAuthenticated &&
-            <NavIcon
-              label={text.signIn}
-              ariaLabel={'sign-in'}
-              icon={<GoSignIn />}
-              linkTo={'/sign-in'}
-              background={bg}
-            />
+              navigationConfig.notAuthorized.map((iconConf) => {
+                return <NavIcon key={iconConf.ariaLabel} {...iconConf} />;
+              })
           }
-          <Tooltip label={text.colorMode}>
-            <IconButton
-              aria-label='color-mode'
-              bg={bg}
-              icon={<SwitchIcon />}
-              onClick={toggleColorMode}
-            />
-          </Tooltip>
+          {navigationConfig.renderAnyway.map((iconConf) => {
+            return <NavIcon key={iconConf.ariaLabel} {...iconConf} />;
+          })}
         </Box>
       </Container>
     </Box>

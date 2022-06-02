@@ -11,7 +11,9 @@ type PropTypes = {
   icon: React.ReactElement
 }
 
-export const NavIcon = ({ label, ariaLabel, background, icon, linkTo, onClick }: PropTypes) => {
+export const NavIcon = (props: PropTypes) => {
+  const { label, ariaLabel, background, icon, linkTo, onClick } = props;
+
   return (
     <>
       {

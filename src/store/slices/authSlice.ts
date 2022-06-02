@@ -28,7 +28,8 @@ const authSlice = createSlice({
     signIn: (state, { payload }: PayloadAction<TSignIn>) => {
       const email = state.users[payload.email]?.email;
       const password = state.users[payload.email]?.password;
-      if (payload.email === email && payload.password === password) {
+      const isValid = payload.email === email && payload.password === password;
+      if (isValid) {
         state.currentUser = email;
         state.isSignedIn = true;
       }

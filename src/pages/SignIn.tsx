@@ -6,6 +6,7 @@ import { text } from '../constants/text';
 import { useAppDispatch } from '../store/store';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { signIn } from '../store/slices/authSlice';
+import { passwordValidation, emailValidation } from '../utils/validation';
 
 type FormData = {
   email: string;
@@ -64,10 +65,7 @@ export const SignIn = () => {
           <Controller
             name='email'
             control={control}
-            rules={{
-              required: true,
-              pattern: /^\S+@\S+\.\S+$/
-            }}
+            rules={emailValidation}
             render={({ field }) =>
               <Input
                 variant='outline'
@@ -87,10 +85,7 @@ export const SignIn = () => {
           <Controller
             name='password'
             control={control}
-            rules={{
-              required: true,
-              minLength: 6
-            }}
+            rules={passwordValidation}
             render={({ field }) =>
               <Input
                 variant='outline'
