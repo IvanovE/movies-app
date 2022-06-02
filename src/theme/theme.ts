@@ -8,13 +8,15 @@ const THEME_BREAKPOINTS = {
   xl: '1200px'
 };
 
+type TBreakpoints = keyof typeof THEME_BREAKPOINTS
+
 export const theme = extendTheme({
   breakpoints: THEME_BREAKPOINTS
 });
 
-export const BREAKPOINTS = Object.keys(THEME_BREAKPOINTS).reduce((acc, breakpoint) => {
-  // eslint-disable-next-line
-  // @ts-ignore
-  acc[breakpoint] = `(min-width: ${THEME_BREAKPOINTS[breakpoint]})`;
-  return acc;
-}, {}) as typeof THEME_BREAKPOINTS;
+export const BREAKPOINTS = Object.keys(THEME_BREAKPOINTS).reduce(
+  (acc, breakpoint) => {
+    acc[breakpoint as TBreakpoints] =
+        `(min-width: ${THEME_BREAKPOINTS[breakpoint as TBreakpoints]})`;
+    return acc;
+  }, {} as typeof THEME_BREAKPOINTS);

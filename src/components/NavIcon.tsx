@@ -5,20 +5,36 @@ import { Link } from 'react-router-dom';
 type PropTypes = {
   label: string
   ariaLabel: string
-  linkTo: string
   background: string
+  linkTo?: string
+  onClick?: () => void
   icon: React.ReactElement
 }
 
-export const NavIcon = ({ label, ariaLabel, background, icon, linkTo }: PropTypes) => {
+export const NavIcon = ({ label, ariaLabel, background, icon, linkTo, onClick }: PropTypes) => {
   return (
-    <Tooltip label={label}>
-      <Link to={linkTo}>
-        <IconButton
-          aria-label={ariaLabel}
-          bg={background}
-          icon={icon} />
-      </Link>
-    </Tooltip>
+    <>
+      {
+        linkTo
+          ?
+          <Tooltip label={label}>
+            <Link to={linkTo}>
+              <IconButton
+                aria-label={ariaLabel}
+                onClick={onClick}
+                bg={background}
+                icon={icon}/>
+            </Link>
+          </Tooltip>
+          :
+          <Tooltip label={label}>
+            <IconButton
+              aria-label={ariaLabel}
+              onClick={onClick}
+              bg={background}
+              icon={icon}/>
+          </Tooltip>
+      }
+    </>
   );
 };
