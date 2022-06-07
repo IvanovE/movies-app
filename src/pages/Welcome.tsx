@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import welcomeImage from '../assets/welcomeImage.jpg';
 import { CircularProgressBar } from '../components/CircularProgressBar';
-import { text } from '../constants/constants';
+import { text } from '../constants/text';
 
 const sx = {
   container: {
