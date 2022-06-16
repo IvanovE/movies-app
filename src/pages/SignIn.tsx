@@ -53,7 +53,7 @@ export const SignIn = () => {
 
   const submitHandler: SubmitHandler<FormData> = (data) => {
     dispatch(signIn(data));
-    history.replace('/movies');
+    history.replace('/catalog');
     reset();
   };
 

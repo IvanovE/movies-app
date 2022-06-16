@@ -3,14 +3,17 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { appReducer } from './slices/appSlice';
 import { authReducer } from './slices/authSlice';
 import { localStorageMiddleware } from './middlewares/localStorageMiddleware';
+import { moviesService } from '../services/baseService';
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    auth: authReducer
+    auth: authReducer,
+    [moviesService.reducerPath]: moviesService.reducer
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
+      moviesService.middleware,
       localStorageMiddleware
     );
   }

@@ -40,7 +40,7 @@ export const Header = () => {
     const { pathname } = history.location;
     dispatch(logout());
     if (pathsToRedirect.includes(pathname)) {
-      history.replace('/movies');
+      history.replace('/catalog');
     }
   };
 
@@ -75,7 +75,7 @@ export const Header = () => {
         label: text.movies,
         ariaLabel: 'movies',
         icon: <RiPlayList2Fill />,
-        linkTo: '/movies',
+        linkTo: '/catalog',
         background: bg
       },
       {

@@ -14,6 +14,7 @@ export const text = {
   createdBy: 'Created by Ivanov',
   haveAccount: 'Already have an account?',
   noAccount: 'Do not have an account?',
+  showMore: 'Show more',
   confirmationRequiredError: 'Confirmation is required',
   passwordMismatchError: 'Password mismatch',
   passwordRequiredError: 'Password is required',

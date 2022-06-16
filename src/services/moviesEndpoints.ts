@@ -1,36 +1,23 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import env from 'react-dotenv';
-import {
-  transformMoviesGroup,
-  transformGetSingleMovie,
-  transformReviews
-} from './transformAdapter';
+import { moviesService } from './baseService';
 import {
   ITransformedMovieDetails,
   ITransformedMoviesGroup,
   ITransformedReviews
-} from '../../types/transforms';
+} from './adapters/types/transforms';
+import {
+  transformGetSingleMovie,
+  transformMoviesGroup,
+  transformReviews
+} from './adapters/adapter';
 
-export const api = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.themoviedb.org/3/'
-  }),
+export const IMG_URL_500 = 'https://image.tmdb.org/t/p/w500';
+export const IMG_URL_ORIGINAL = 'https://image.tmdb.org/t/p/original';
+
+export const moviesEndpoints = moviesService.injectEndpoints({
   endpoints: (build) => ({
-    getNowPlaying: build.query<ITransformedMoviesGroup, void>({
-      query: () => `/movie/now_playing?api_key=${env.API_KEY}`,
-      transformResponse: transformMoviesGroup
-    }),
-    getUpcoming: build.query<ITransformedMoviesGroup, void>({
-      query: () => `/movie/upcoming?api_key=${env.API_KEY}`,
-      transformResponse: transformMoviesGroup
-    }),
-    getTopRated: build.query<ITransformedMoviesGroup, void>({
-      query: () => `/movie/top_rated?api_key=${env.API_KEY}`,
-      transformResponse: transformMoviesGroup
-    }),
-    getPopular: build.query<ITransformedMoviesGroup, void>({
-      query: () => `/movie/popular?api_key=${env.API_KEY}`,
+    getMovies: build.query<ITransformedMoviesGroup, { list: string, page: number }>({
+      query: ({ list, page }) => `/movie/${list}?api_key=${env.API_KEY}&page=${page}`,
       transformResponse: transformMoviesGroup
     }),
     getSimilar: build.query<ITransformedMoviesGroup, number>({
@@ -55,3 +42,12 @@ export const api = createApi({
     })
   })
 });
+
+export const {
+  useGetMoviesQuery,
+  useGetSimilarQuery,
+  useGetLatestQuery,
+  useGetMovieByIdQuery,
+  useGetMovieReviewsQuery,
+  useSearchMovieQuery
+} = moviesEndpoints;
