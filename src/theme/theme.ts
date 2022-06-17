@@ -1,4 +1,5 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme  } from '@chakra-ui/react';
+import { Button } from './components/Button';
 
 const THEME_BREAKPOINTS = {
   xs: '0',
@@ -11,6 +12,9 @@ const THEME_BREAKPOINTS = {
 type TBreakpoints = keyof typeof THEME_BREAKPOINTS
 
 export const theme = extendTheme({
+  components: {
+    Button
+  },
   breakpoints: THEME_BREAKPOINTS
 });
 

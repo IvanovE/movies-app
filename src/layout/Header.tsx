@@ -26,8 +26,6 @@ const pathsToRedirect = [
   '/favourites',
 ];
 
-
-
 export const Header = () => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(auth.isSignedIn);
@@ -50,14 +48,12 @@ export const Header = () => {
         label: text.favourites,
         ariaLabel: 'favourites',
         icon: <MdFavorite/>,
-        linkTo: '/favourites',
-        background: bg
+        linkTo: '/favourites'
       },
       {
         label: text.signOut,
         ariaLabel: 'sign-out',
         icon: <ImExit />,
-        background: bg,
         onClick: exit
       },
     ],
@@ -66,8 +62,7 @@ export const Header = () => {
         label: text.signIn,
         ariaLabel: 'sign-in',
         icon: <GoSignIn />,
-        linkTo: '/sign-in',
-        background: bg
+        linkTo: '/sign-in'
       },
     ],
     renderAnyway: [
@@ -75,13 +70,11 @@ export const Header = () => {
         label: text.movies,
         ariaLabel: 'movies',
         icon: <RiPlayList2Fill />,
-        linkTo: '/catalog',
-        background: bg
+        linkTo: '/catalog'
       },
       {
         label: text.colorMode,
         ariaLabel: 'color-mode',
-        background: bg,
         icon: <SwitchIcon />,
         onClick: toggleColorMode
       },
@@ -89,7 +82,7 @@ export const Header = () => {
   };
 
   return (
-    <Box w='100%' position='sticky' bg={bg} py={4} top={0}>
+    <Box w='100%' position='sticky' bg={bg} py={4} top={0} zIndex={2}>
       <Container maxW='container.xl' display='flex'>
         <Link to='/'>
           <Heading as='h2' size='lg' mr={6}>{text.name}</Heading>
