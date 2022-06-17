@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom';
 type PropTypes = {
   label: string
   ariaLabel: string
-  background: string
   linkTo?: string
   onClick?: () => void
   icon: React.ReactElement
 }
 
 export const NavIcon = (props: PropTypes) => {
-  const { label, ariaLabel, background, icon, linkTo, onClick } = props;
+  const { label, ariaLabel, icon, linkTo, onClick } = props;
 
   return (
     <>
@@ -24,8 +23,9 @@ export const NavIcon = (props: PropTypes) => {
               <IconButton
                 aria-label={ariaLabel}
                 onClick={onClick}
-                bg={background}
-                icon={icon}/>
+                icon={icon}
+                variant='solid'
+              />
             </Link>
           </Tooltip>
           :
@@ -33,8 +33,9 @@ export const NavIcon = (props: PropTypes) => {
             <IconButton
               aria-label={ariaLabel}
               onClick={onClick}
-              bg={background}
-              icon={icon}/>
+              icon={icon}
+              variant='solid'
+            />
           </Tooltip>
       }
     </>
