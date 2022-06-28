@@ -1,7 +1,7 @@
 export interface ITransformedMovieDetails {
   id: number
-  poster: string | undefined
-  backdrop: string | undefined
+  poster?: string
+  backdrop?: string
   adult: boolean
   overview: string | null
   title: string
@@ -20,8 +20,8 @@ export interface ITransformedMovieDetails {
 interface ITransformedStandardMovie {
   id: number
   adult: boolean
-  backdrop: string | undefined
-  poster: string | undefined
+  backdrop?: string
+  poster?: string
   overview: string | null
   title: string
   release: string

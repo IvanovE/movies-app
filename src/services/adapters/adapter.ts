@@ -12,7 +12,7 @@ import {
   IMG_URL_ORIGINAL
 } from '../moviesEndpoints';
 
-const standardMovieTransform = (movie: IStandardMovie) => {
+const transformStandardMovie = (movie: IStandardMovie) => {
   return {
     id: movie.id,
     adult: movie.adult,
@@ -25,7 +25,7 @@ const standardMovieTransform = (movie: IStandardMovie) => {
   };
 };
 
-const reviewTransform = (review: IReview) => {
+const transformReview = (review: IReview) => {
   return {
     author: review.author,
     name: review.author_details.name,
@@ -62,7 +62,7 @@ export const transformGetSingleMovie = (response: ISingleMovieResponse) => {
 export const transformMoviesGroup = (response: IMoviesGroupResponse) => {
   const totalPages = response.total_pages;
   const totalResults = response.total_results;
-  const results = response.results.map(standardMovieTransform);
+  const results = response.results.map(transformStandardMovie);
 
   return {
     totalPages,
@@ -73,7 +73,7 @@ export const transformMoviesGroup = (response: IMoviesGroupResponse) => {
 
 export const transformReviews = (response: IMovieReviewsResponse) => {
   const totalResults = response.total_results;
-  const reviews = response.results.map(reviewTransform);
+  const reviews = response.results.map(transformReview);
   return {
     totalResults,
     results: reviews

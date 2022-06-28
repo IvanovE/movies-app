@@ -34,7 +34,7 @@ export const Header = () => {
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
   const bg = useColorModeValue('cyan.600', 'cyan.900');
 
-  const exit = () => {
+  const signOut = () => {
     const { pathname } = history.location;
     dispatch(logout());
     if (pathsToRedirect.includes(pathname)) {
@@ -54,7 +54,7 @@ export const Header = () => {
         label: text.signOut,
         ariaLabel: 'sign-out',
         icon: <ImExit />,
-        onClick: exit
+        onClick: signOut
       },
     ],
     notAuthorized: [

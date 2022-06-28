@@ -35,7 +35,7 @@ const styles = {
   }
 };
 
-type PropsType = {
+type PropTypes = {
   id: number
   list: string
   page: number
@@ -45,7 +45,7 @@ type PropsType = {
   rating: string
 }
 
-export const MovieCard = ({ id, list, page, poster, title, adult, rating }: PropsType) => {
+export const MovieCard = ({ id, list, page, poster, title, adult, rating }: PropTypes) => {
   return (
     <Box sx={styles.container}>
       <Link to={`/catalog/${list}/${page}/${id}`}>
