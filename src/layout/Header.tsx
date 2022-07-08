@@ -82,7 +82,7 @@ export const Header = () => {
   };
 
   return (
-    <Box w='100%' position='sticky' bg={bg} py={4} top={0} zIndex={2}>
+    <Box w='100%' position='sticky' bg={bg} py={4} top={0} zIndex={999}>
       <Container maxW='container.xl' display='flex'>
         <Link to='/'>
           <Heading as='h2' size='lg' mr={6}>{text.name}</Heading>

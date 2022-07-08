@@ -17,7 +17,7 @@ export interface ITransformedMovieDetails {
   countries: string
 }
 
-interface ITransformedStandardMovie {
+export interface ITransformedStandardMovie {
   id: number
   adult: boolean
   backdrop?: string

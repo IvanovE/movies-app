@@ -1,3 +1,5 @@
+import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
+
 type obj = {
   [key: string]: unknown
 }
@@ -17,4 +19,15 @@ export const excludeProperties2 = <T extends obj, K extends keyof T>(object: T, 
     delete newObj[property];
   }
   return newObj;
+};
+
+export const pickMoviePropertiesToArray = <T extends ITransformedMovieDetails, K extends keyof T>
+  (object: T, properties: K[]): Array<string> => {
+  return properties.map((property) => {
+    if (typeof property === 'string' && object[property]) {
+      const propertyWithCapitalFirstLetter = property[0].toUpperCase() + property.slice(1);
+      return `${propertyWithCapitalFirstLetter}: ${object[property]}`;
+    }
+    return '';
+  }).filter((str) => str.length > 0);
 };

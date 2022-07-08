@@ -37,18 +37,16 @@ const styles = {
 
 type PropTypes = {
   id: number
-  list: string
-  page: number
   poster: string | undefined
   title: string
   adult: boolean
   rating: string
 }
 
-export const MovieCard = ({ id, list, page, poster, title, adult, rating }: PropTypes) => {
+export const MovieCard = ({ id, poster, title, adult, rating }: PropTypes) => {
   return (
     <Box sx={styles.container}>
-      <Link to={`/catalog/${list}/${page}/${id}`}>
+      <Link to={`/movie/${id}`}>
         <Box sx={styles.imgContainer}>
           <Image src={poster} alt={title} />
           {adult &&

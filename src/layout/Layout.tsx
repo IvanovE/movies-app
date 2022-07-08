@@ -10,7 +10,8 @@ const sx = {
     minHeight: '100vh'
   },
   content: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginTop: '2rem'
   }
 };
 

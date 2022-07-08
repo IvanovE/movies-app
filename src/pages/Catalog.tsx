@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slider } from '../components/Slider';
+import { MovieGroup } from '../components/MovieGroup';
 
 const catalogConfig = [
   { title: 'Now Playing', list: 'now_playing', page: 1, delay: 5000 },
@@ -13,7 +13,7 @@ export const Catalog = () => {
     <>
       {
         catalogConfig.map((conf) => (
-          <Slider
+          <MovieGroup
             key={conf.title}
             title={conf.title}
             list={conf.list}

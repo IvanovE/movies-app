@@ -19,8 +19,8 @@ export const moviesEndpoints = moviesService.injectEndpoints({
       query: ({ list, page }) => `/movie/${list}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`,
       transformResponse: transformMoviesGroup
     }),
-    getSimilar: build.query<ITransformedMoviesGroup, number>({
-      query: (id) => `/movie/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}`,
+    getRecommendations: build.query<ITransformedMoviesGroup, number>({
+      query: (id) => `/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`,
       transformResponse: transformMoviesGroup
     }),
     getLatest: build.query<ITransformedMovieDetails, void>({
@@ -44,7 +44,7 @@ export const moviesEndpoints = moviesService.injectEndpoints({
 
 export const {
   useGetMoviesQuery,
-  useGetSimilarQuery,
+  useGetRecommendationsQuery,
   useGetLatestQuery,
   useGetMovieByIdQuery,
   useGetMovieReviewsQuery,
