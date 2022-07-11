@@ -7,7 +7,8 @@ const sx = {
   container: {
     flexDirection: 'column',
     position: 'relative',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    overflow: 'hidden'
   },
   content: {
     flexGrow: 1,

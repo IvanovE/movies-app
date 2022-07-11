@@ -1,11 +1,56 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Image, Flex, Heading, Skeleton } from '@chakra-ui/react';
+import { Box, Image, Heading, Skeleton } from '@chakra-ui/react';
 import { useGetMovieByIdQuery, useGetRecommendationsQuery } from '../services/moviesEndpoints';
 import ageLimit from '../assets/ageLimit.png';
 import { pickMoviePropertiesToArray } from '../utils/utils';
 import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
 import { Slider } from '../components/Slider';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import { BREAKPOINTS } from '../theme/theme';
+
+const styles = {
+  container: {
+    width: '100%',
+    position: 'relative',
+    marginBottom: '2rem'
+  },
+  backdrop: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    filter: 'brightness(40%)',
+    borderRadius: '4px'
+  },
+  infoContainer: {
+    zIndex: 2,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: '100%',
+    top: 0,
+    left: 0
+  },
+  poster: {
+    maxW: '300px',
+    borderRadius: '4px'
+  },
+  ageLimitPng: {
+    position: 'absolute',
+    top: 2,
+    right: 2,
+    width: '3rem'
+  },
+  description: {
+    background: 'rgba(255, 255, 255, .5)',
+    padding: '1rem',
+    borderRadius: '4px'
+  },
+  title: {
+    size:'xl',
+    textAlign: 'center',
+    marginBottom: '.5rem'
+  }
+};
 
 const properties: Array<keyof ITransformedMovieDetails> = [
   'tagline',
@@ -26,11 +71,28 @@ const recommendationsConfig = {
   delay: 5000
 };
 
+type QueryParamTypes = {
+  list: string
+  page: string
+  id: string
+}
+
 export const MovieDetails = () => {
-  const { id } = useParams<{list: string, page: string, id: string}>();
-  const { data: movieDetails, isLoading: isMovieDetailsLoading } = useGetMovieByIdQuery(Number(id));
-  const { data: recommendedMoviesData, isLoading: isRecommendedMoviesLoading } = useGetRecommendationsQuery(Number(id));
+  const { id: strId } = useParams<QueryParamTypes>();
+  const id = Number(strId);
+
+  const {
+    data: movieDetails,
+    isLoading: isMovieDetailsLoading
+  } = useGetMovieByIdQuery(id);
+  const {
+    data: recommendedMoviesData,
+    isLoading: isRecommendedMoviesLoading
+  } = useGetRecommendationsQuery(id);
   const recommendedMovies = recommendedMoviesData?.results;
+
+  const isLaptop = useMediaQuery(BREAKPOINTS.lg);
+  const isTablet = useMediaQuery(BREAKPOINTS.md);
 
   const movieDescription = movieDetails
     ? pickMoviePropertiesToArray(
@@ -42,28 +104,35 @@ export const MovieDetails = () => {
     <>
       <Skeleton isLoaded={!isMovieDetailsLoading}>
         {movieDetails &&
-        <Box width='100%' position='relative'>
-          <Image src={movieDetails.backdrop} sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            filter: 'brightness(40%)',
-            borderRadius:'4px'
-          }} />
-          <Flex zIndex={2} justifyContent='space-around' alignItems='center' height='100%' position='absolute' top={0} left={0}>
+        <Box sx={styles.container}>
+          {!isLaptop &&
+            <Image src={movieDetails.backdrop} sx={styles.backdrop}/>
+          }
+          <Box
+            sx={styles.infoContainer}
+            display={isTablet ? 'block' : 'flex'}
+            position={isLaptop ? 'relative' : 'absolute'}
+          >
             <Box position='relative'>
-              <Image src={movieDetails.poster} alt={movieDetails.title} maxW='300px' borderRadius='4px' />
+              <Image
+                src={movieDetails.poster}
+                alt={movieDetails.title}
+                sx={styles.poster}
+                margin={isTablet ? '0 auto 2rem' : '0 auto'}
+              />
               {movieDetails.adult &&
-                <Image src={ageLimit} alt='18+' sx={{
-                  position: 'absolute',
-                  top: 2,
-                  right: 2,
-                  width: '3rem'
-                }} />
+                <Image
+                  src={ageLimit}
+                  alt='18+'
+                  sx={styles.ageLimitPng}
+                />
               }
             </Box>
-            <Box width='50%' background='rgba(255, 255, 255, .6)' padding='1rem' borderRadius='4px'>
-              <Heading size='xl' textAlign='center' marginBottom='.5rem'>
+            <Box
+              sx={styles.description}
+              width={isTablet ? '100%' : '50%'}
+            >
+              <Heading sx={styles.title}>
                 {movieDetails.title}
               </Heading>
               {movieDescription?.map((field, index) => (
@@ -72,12 +141,12 @@ export const MovieDetails = () => {
                 </Box>
               ))}
             </Box>
-          </Flex>
+          </Box>
         </Box>
         }
       </Skeleton>
       <Skeleton isLoaded={!isRecommendedMoviesLoading}>
-        {recommendedMovies &&
+        {recommendedMovies?.length &&
           <Slider
             {...recommendationsConfig}
             moviesData={recommendedMovies}
