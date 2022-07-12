@@ -31,3 +31,7 @@ export const pickMoviePropertiesToArray = <T extends ITransformedMovieDetails, K
     return '';
   }).filter((str) => str.length > 0);
 };
+
+export const normalizeDate = (date: string): string => {
+  return new Date(date.toString()).toDateString();
+};

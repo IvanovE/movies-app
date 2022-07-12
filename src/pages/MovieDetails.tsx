@@ -1,13 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Image, Heading, Skeleton } from '@chakra-ui/react';
-import { useGetMovieByIdQuery, useGetRecommendationsQuery } from '../services/moviesEndpoints';
+import {
+  useGetMovieByIdQuery,
+  useGetMovieReviewsQuery,
+  useGetRecommendationsQuery
+} from '../services/moviesEndpoints';
 import ageLimit from '../assets/ageLimit.png';
 import { pickMoviePropertiesToArray } from '../utils/utils';
 import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
 import { Slider } from '../components/Slider';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { BREAKPOINTS } from '../theme/theme';
+import { ReviewsSection } from '../components/ReviewsSection';
 
 const styles = {
   container: {
@@ -89,7 +94,13 @@ export const MovieDetails = () => {
     data: recommendedMoviesData,
     isLoading: isRecommendedMoviesLoading
   } = useGetRecommendationsQuery(id);
+  const {
+    data: movieReviews,
+    isLoading: isMovieReviewsLoading
+  } = useGetMovieReviewsQuery(id);
+
   const recommendedMovies = recommendedMoviesData?.results;
+  const reviews = movieReviews?.results || [];
 
   const isLaptop = useMediaQuery(BREAKPOINTS.lg);
   const isTablet = useMediaQuery(BREAKPOINTS.md);
@@ -99,6 +110,9 @@ export const MovieDetails = () => {
       movieDetails,
       properties)
     : [];
+
+  const shouldShowComments = !!movieReviews?.totalResults;
+  const shouldShowRecommendations = !!recommendedMovies?.length;
 
   return (
     <>
@@ -145,8 +159,18 @@ export const MovieDetails = () => {
         </Box>
         }
       </Skeleton>
+
+      <Skeleton isLoaded={!isMovieReviewsLoading}>
+        {shouldShowComments &&
+          <ReviewsSection
+            results={reviews}
+            totalResults={movieReviews?.totalResults}
+          />
+        }
+      </Skeleton>
+
       <Skeleton isLoaded={!isRecommendedMoviesLoading}>
-        {recommendedMovies?.length &&
+        {shouldShowRecommendations &&
           <Slider
             {...recommendationsConfig}
             moviesData={recommendedMovies}

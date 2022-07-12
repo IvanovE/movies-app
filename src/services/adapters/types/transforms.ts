@@ -39,7 +39,7 @@ interface ITransformedReview {
   name: string
   username: string
   avatar: string | null
-  rating: number | null
+  rating: string | null
   content: string
   createdAt: string
   id: string

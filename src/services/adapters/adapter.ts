@@ -21,7 +21,7 @@ const transformStandardMovie = (movie: IStandardMovie) => {
     overview: movie.overview,
     title: movie.title,
     release: movie.release_date,
-    rating: movie.vote_average + ' / 10'
+    rating: Math.round((movie.vote_average + Number.EPSILON) * 10) / 10 + ' / 10'
   };
 };
 
@@ -31,7 +31,7 @@ const transformReview = (review: IReview) => {
     name: review.author_details.name,
     username: review.author_details.username,
     avatar: review.author_details.avatar_path,
-    rating: review.author_details.rating,
+    rating: review.author_details.rating + ' / 10',
     content: review.content,
     createdAt: review.created_at,
     id: review.id

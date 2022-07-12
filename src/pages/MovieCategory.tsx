@@ -17,7 +17,7 @@ const titles = {
   upcoming: 'Upcoming'
 };
 
-const moviesPerPage = 20;
+const MOVIES_PER_PAGE = 20;
 
 type QueryParamTypes = {
   list: keyof typeof titles
@@ -74,7 +74,7 @@ export const MovieCategory = () => {
           totalCount={data.totalResults}
           currentPage={currentPage}
           onPageChange={onPageChange}
-          pageSize={moviesPerPage}
+          pageSize={MOVIES_PER_PAGE}
         />
       }
     </>
