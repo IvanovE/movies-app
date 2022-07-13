@@ -32,6 +32,26 @@ export interface IStandardMovie {
   vote_average: number
 }
 
+export interface IStandardActor {
+  id: number
+  adult: boolean
+  gender: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string | null
+  cast_id: number
+  character: string
+  credit_id: string
+  order: number
+}
+
+export interface IStandardCrewMember extends Omit<IStandardActor, 'cast_id' | 'character' | 'order'> {
+  department: string
+  job: string
+}
+
 export interface IReview {
   author: string
   author_details: {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import ageLimit from '../assets/ageLimit.png';
 
 const styles = {
   container: {
@@ -12,9 +11,6 @@ const styles = {
       transition: '0.3s ease-in-out transform',
       transform: 'scale(1.01)'
     }
-  },
-  img: {
-    borderRadius: '4px'
   },
   rating: {
     position: 'absolute',
@@ -35,6 +31,9 @@ const styles = {
   imgContainer: {
     position: 'relative'
   },
+  img: {
+    borderRadius: '4px'
+  },
   title: {
     marginTop: 2,
     fontSize: 'xl'
@@ -43,27 +42,27 @@ const styles = {
 
 type PropTypes = {
   id: number
-  poster?: string
-  title: string
-  adult: boolean
-  rating: string
+  name: string
+  popularity: string
+  poster: string
+  character: string
 }
 
-export const MovieCard = ({ id, poster, title, adult, rating }: PropTypes) => {
+export const ActorCard = ({ id, name, popularity, poster, character }: PropTypes) => {
   return (
     <Box sx={styles.container}>
-      <Link to={`/movie/${id}`}>
+      <Link to={`/actor/${id}`}>
         <Box sx={styles.imgContainer}>
-          <Image src={poster} alt={title} sx={styles.img} />
-          {adult &&
-            <Image src={ageLimit} alt='18+' sx={styles.imgAgeLimit} />
-          }
+          <Image src={poster} alt={name} sx={styles.img} />
           <Text sx={styles.rating}>
-            {rating}
+            {popularity}
           </Text>
         </Box>
         <Text sx={styles.title}>
-          {title}
+          {character
+            ? `${name} (${character})`
+            : name
+          }
         </Text>
       </Link>
     </Box>

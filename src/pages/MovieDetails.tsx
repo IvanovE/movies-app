@@ -4,15 +4,17 @@ import { Box, Image, Heading, Skeleton } from '@chakra-ui/react';
 import {
   useGetMovieByIdQuery,
   useGetMovieReviewsQuery,
-  useGetRecommendationsQuery
+  useGetRecommendationsQuery,
+  useGetMovieTeamQuery
 } from '../services/moviesEndpoints';
 import ageLimit from '../assets/ageLimit.png';
-import { pickMoviePropertiesToArray } from '../utils/utils';
+import { destructObjIntoArr } from '../utils/utils';
 import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
-import { Slider } from '../components/Slider';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { BREAKPOINTS } from '../theme/theme';
 import { ReviewsSection } from '../components/ReviewsSection';
+import { MovieSliderWrapper } from '../components/Slider/Wrappers/MovieSliderWrapper';
+import { ActorSliderWrapper } from '../components/Slider/Wrappers/ActorSliderWrapper';
 
 const styles = {
   container: {
@@ -71,9 +73,15 @@ const properties: Array<keyof ITransformedMovieDetails> = [
   'status',
 ];
 
-const recommendationsConfig = {
-  title: 'Recommendations',
-  delay: 5000
+const sliderConfig = {
+  recommendations: {
+    title: 'Recommendations',
+    delay: 5000
+  },
+  actors: {
+    title: 'Actors',
+    delay: 10_000
+  }
 };
 
 type QueryParamTypes = {
@@ -91,41 +99,49 @@ export const MovieDetails = () => {
     isLoading: isMovieDetailsLoading
   } = useGetMovieByIdQuery(id);
   const {
-    data: recommendedMoviesData,
+    data: movieRecommendations,
     isLoading: isRecommendedMoviesLoading
   } = useGetRecommendationsQuery(id);
   const {
     data: movieReviews,
     isLoading: isMovieReviewsLoading
   } = useGetMovieReviewsQuery(id);
-
-  const recommendedMovies = recommendedMoviesData?.results;
-  const reviews = movieReviews?.results || [];
+  const {
+    data: movieTeam,
+    isLoading: isMovieTeamLoading
+  } = useGetMovieTeamQuery(id);
 
   const isLaptop = useMediaQuery(BREAKPOINTS.lg);
   const isTablet = useMediaQuery(BREAKPOINTS.md);
 
   const movieDescription = movieDetails
-    ? pickMoviePropertiesToArray(
+    ? destructObjIntoArr(
       movieDetails,
       properties)
     : [];
 
-  const shouldShowComments = !!movieReviews?.totalResults;
-  const shouldShowRecommendations = !!recommendedMovies?.length;
+  const recommendations = movieRecommendations?.results;
+  const reviews = movieReviews?.results;
+  const actors = movieTeam?.actors;
+
+  const shouldShowRecommendations = !!recommendations?.length;
+  const shouldShowReviews = !!reviews?.length && !!movieReviews?.totalResults;
+  const shouldShowActors = !!actors?.length;
+
+  const hasBackdrop = !!movieDetails?.backdrop;
 
   return (
     <>
       <Skeleton isLoaded={!isMovieDetailsLoading}>
         {movieDetails &&
         <Box sx={styles.container}>
-          {!isLaptop &&
+          {!isLaptop && hasBackdrop &&
             <Image src={movieDetails.backdrop} sx={styles.backdrop}/>
           }
           <Box
             sx={styles.infoContainer}
             display={isTablet ? 'block' : 'flex'}
-            position={isLaptop ? 'relative' : 'absolute'}
+            position={isLaptop || !hasBackdrop ? 'relative' : 'absolute'}
           >
             <Box position='relative'>
               <Image
@@ -161,20 +177,30 @@ export const MovieDetails = () => {
       </Skeleton>
 
       <Skeleton isLoaded={!isMovieReviewsLoading}>
-        {shouldShowComments &&
+        {shouldShowReviews &&
           <ReviewsSection
             results={reviews}
             totalResults={movieReviews?.totalResults}
+            movieId={id}
+          />
+        }
+      </Skeleton>
+
+      <Skeleton isLoaded={!isMovieTeamLoading}>
+        {shouldShowActors &&
+          <ActorSliderWrapper
+            config={sliderConfig.actors}
+            data={actors}
           />
         }
       </Skeleton>
 
       <Skeleton isLoaded={!isRecommendedMoviesLoading}>
         {shouldShowRecommendations &&
-          <Slider
-            {...recommendationsConfig}
-            moviesData={recommendedMovies}
-          />
+            <MovieSliderWrapper
+              config={sliderConfig.recommendations}
+              data={recommendations}
+            />
         }
       </Skeleton>
     </>

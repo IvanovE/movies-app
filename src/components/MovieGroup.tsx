@@ -3,7 +3,8 @@ import { Skeleton } from '@chakra-ui/react';
 import 'swiper/css';
 import 'swiper/css/bundle';
 import { useGetMoviesQuery } from '../services/moviesEndpoints';
-import { Slider } from './Slider';
+import { MovieSliderWrapper } from './Slider/Wrappers/MovieSliderWrapper';
+import { text } from '../constants/text';
 
 type PropTypes = {
   title: string
@@ -16,15 +17,20 @@ export const MovieGroup = ({ title, list, page, delay }: PropTypes) => {
   const { data, isLoading } = useGetMoviesQuery({ list, page });
   const moviesData = data?.results;
 
+  const link = `catalog/${list}/${page}`;
+  const linkText = text.showMore;
+
   return (
     <Skeleton isLoaded={!isLoading}>
       {moviesData &&
-        <Slider
-          title={title}
-          list={list}
-          page={page}
-          delay={delay}
-          moviesData={moviesData}
+        <MovieSliderWrapper
+          config={{
+            title,
+            delay,
+            link,
+            linkText
+          }}
+          data={moviesData}
         />
       }
     </Skeleton>

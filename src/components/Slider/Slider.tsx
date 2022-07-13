@@ -2,19 +2,24 @@ import React from 'react';
 import { Box, Heading, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import { Navigation, Scrollbar, Lazy, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/bundle';
-import { MovieCard } from './MovieCard';
-import { text } from '../constants/text';
-import { ITransformedStandardMovie } from '../services/adapters/types/transforms';
 
 const styles = {
+  container: {
+    paddingBottom: 8,
+    position: 'relative'
+  },
   headingContainer: {
     display: 'flex',
     alignItems: 'center',
     marginBottom: '2rem'
+  },
+  title: {
+    size: '2xl',
+    marginRight: '1rem'
   }
 };
 
@@ -35,28 +40,28 @@ const breakpoints = {
 
 type PropTypes = {
   title: string
-  list?: string
-  page?: number
+  link?: string
+  linkText?: string
   delay: number
-  moviesData: ITransformedStandardMovie[]
+  data: React.ReactNode[]
 };
 
-export const Slider = ({ title, list, page, delay, moviesData }: PropTypes) => {
+export const Slider = ({ title, link, linkText, delay, data }: PropTypes) => {
 
   return (
-    <Box paddingBottom={8} position='relative'>
+    <Box sx={styles.container}>
       <Box sx={styles.headingContainer}>
-        <Heading size='2xl' marginRight='1rem'>
+        <Heading sx={styles.title}>
           {title}
         </Heading>
-        {list && page &&
-            <Link to={`catalog/${list}/${page}`}>
+        {link &&
+            <Link to={link}>
               <Button
                 rightIcon={<AiOutlineArrowRight/>}
                 variant='solid'
                 marginTop={2}
               >
-                {text.showMore}
+                {linkText}
               </Button>
             </Link>
         }
@@ -70,18 +75,7 @@ export const Slider = ({ title, list, page, delay, moviesData }: PropTypes) => {
         scrollbar={{ draggable: true }}
         breakpoints={breakpoints}
       >
-        {moviesData &&
-          moviesData.map((movie) => (
-            <SwiperSlide key={movie.id}>
-              <MovieCard
-                id={movie.id}
-                title={movie.title}
-                adult={movie.adult}
-                rating={movie.rating}
-                poster={movie.poster}
-              />
-            </SwiperSlide>
-          ))}
+        {data}
       </Swiper>
     </Box>
   );

@@ -4,7 +4,7 @@ import {
   ICompany,
   ICountry,
   IReview,
-  IStandardMovie
+  IStandardMovie, IStandardActor, IStandardCrewMember
 } from './common';
 
 export interface IAuthResponse {
@@ -41,4 +41,10 @@ export interface IMoviesGroupResponse {
 export interface IMovieReviewsResponse {
   results: IReview[]
   total_results: number
+}
+
+export interface IMovieTeamResponse {
+  cast: IStandardActor[]
+  crew: IStandardCrewMember[]
+  id: number
 }

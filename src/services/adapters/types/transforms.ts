@@ -17,11 +17,31 @@ export interface ITransformedMovieDetails {
   countries: string
 }
 
+export interface ITransformedActor {
+  id: number
+  adult: boolean
+  gender: number
+  knownForDepartment: string
+  name: string
+  originalName: string
+  popularity: string
+  poster: string
+  castId: number
+  character: string
+  creditId: string
+  order: number
+}
+
+interface ITransformedCrewMember extends Omit<ITransformedActor, 'castId' | 'character' | 'order'> {
+  department: string
+  job: string
+}
+
 export interface ITransformedStandardMovie {
   id: number
   adult: boolean
   backdrop?: string
-  poster?: string
+  poster: string
   overview: string | null
   title: string
   release: string
@@ -48,4 +68,10 @@ interface ITransformedReview {
 export interface ITransformedReviews {
   results: ITransformedReview[]
   totalResults: number
+}
+
+export interface ITransformedMovieTeam {
+  id: number
+  actors: ITransformedActor[]
+  crew: ITransformedCrewMember[]
 }

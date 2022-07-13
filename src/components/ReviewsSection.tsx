@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Avatar, Box, Text } from '@chakra-ui/react';
 import { Pagination } from './Pagination';
 import { ReadMore } from './ReadMore';
@@ -40,14 +40,17 @@ const styles = {
 
 const REVIEWS_PER_PAGE = 3;
 
-export const ReviewsSection = ({ results: movieReviews, totalResults }: ITransformedReviews) => {
+interface PropTypes extends ITransformedReviews {
+  movieId: number
+}
+
+export const ReviewsSection = ({ results: movieReviews, totalResults, movieId }: PropTypes) => {
   const [currentPage, setCurrentPage,] = useState(1);
   const reviewSectionRef = useRef<HTMLDivElement>(null);
 
-  // todo Остаемся на том же компоненте, нажав на фильм в реках, state комментов остается
   useUpdatedEffect(
     () => setCurrentPage(1),
-    [window.location.pathname,]
+    [movieId,]
   );
 
   const onPageChange = (page: number) => {
