@@ -32,7 +32,9 @@ const styles = {
     position: 'relative'
   },
   img: {
-    borderRadius: '4px'
+    borderRadius: '4px',
+    imageRendering: '-webkit-optimize-contrast',
+    aspectRatio: '2/3'
   },
   title: {
     marginTop: 2,

@@ -30,7 +30,7 @@ export const MovieCategory = () => {
   const [currentPage, setCurrentPage,] = useState(page);
   const history = useHistory();
   const { data, isLoading } = useGetMoviesQuery({ list, page });
-  const movies = data?.results;
+  const { results: movies } = data || {};
 
   const onPageChange = (page: number): void => {
     setCurrentPage(page);

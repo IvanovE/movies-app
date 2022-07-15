@@ -15,7 +15,7 @@ type PropTypes = {
 
 export const MovieGroup = ({ title, list, page, delay }: PropTypes) => {
   const { data, isLoading } = useGetMoviesQuery({ list, page });
-  const moviesData = data?.results;
+  const { results: moviesData } = data || {};
 
   const link = `catalog/${list}/${page}`;
   const linkText = text.showMore;

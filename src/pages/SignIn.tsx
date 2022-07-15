@@ -18,7 +18,7 @@ const defaultValues: FormData = {
   password: ''
 };
 
-const sx = {
+const styles = {
   title: {
     textAlign: 'center',
     marginY: '2rem'
@@ -59,7 +59,7 @@ export const SignIn = () => {
 
   return (
     <Container>
-      <Text fontSize='2xl' sx={sx.title}>{text.signIn}</Text>
+      <Text fontSize='2xl' sx={styles.title}>{text.signIn}</Text>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Stack spacing={3}>
           <Controller
@@ -70,13 +70,13 @@ export const SignIn = () => {
               <Input
                 variant='outline'
                 placeholder='Email'
-                sx={errors.email && sx.inputError}
+                sx={errors.email && styles.inputError}
                 {...field}
               />
             }
           />
           {errors?.email &&
-            <Box sx={sx.textError}>
+            <Box sx={styles.textError}>
               {errors.email?.type === 'required' && text.emailRequiredError}
               {errors.email?.type === 'pattern' && text.emailPatternError}
             </Box>
@@ -91,13 +91,13 @@ export const SignIn = () => {
                 variant='outline'
                 type='password'
                 placeholder='Password'
-                sx={errors.password && sx.inputError}
+                sx={errors.password && styles.inputError}
                 {...field}
               />
             }
           />
           {errors?.password &&
-              <Box sx={sx.textError}>
+              <Box sx={styles.textError}>
                 {errors.password?.type === 'required' && text.passwordRequiredError}
                 {errors.password?.type === 'minLength' && text.passwordMinLengthError}
               </Box>
@@ -108,8 +108,8 @@ export const SignIn = () => {
           </Button>
         </Stack>
       </form>
-      <Text sx={sx.redirect}>
-        {text.noAccount} <Link style={sx.link} to={'/sign-up'}>{text.signUp}</Link>
+      <Text sx={styles.redirect}>
+        {text.noAccount} <Link style={styles.link} to={'/sign-up'}>{text.signUp}</Link>
       </Text>
     </Container>
   );

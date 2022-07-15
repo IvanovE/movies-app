@@ -8,13 +8,16 @@ const styles = {
     display: 'flex',
     textAlign: 'center',
     marginBottom: '1rem',
+    height: '100%',
     _hover: {
       transition: '0.3s ease-in-out transform',
       transform: 'scale(1.01)'
     }
   },
   img: {
-    borderRadius: '4px'
+    borderRadius: '4px',
+    imageRendering: '-webkit-optimize-contrast',
+    aspectRatio: '2/3'
   },
   rating: {
     position: 'absolute',

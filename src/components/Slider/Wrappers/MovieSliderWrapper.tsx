@@ -1,8 +1,8 @@
-import { ITransformedStandardMovie } from '../../../services/adapters/types/transforms';
+import React from 'react';
+import { SwiperSlide } from 'swiper/react';
 import { Slider } from '../Slider';
 import { MovieCard } from '../../MovieCard';
-import { SwiperSlide } from 'swiper/react';
-import React from 'react';
+import { ITransformedStandardMovie } from '../../../services/adapters/types/transforms';
 
 type PropTypes = {
   config: {

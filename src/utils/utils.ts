@@ -33,3 +33,8 @@ export const destructObjIntoArr = <T, K extends keyof T>
 export const normalizeDate = (date: string): string => {
   return new Date(date.toString()).toDateString();
 };
+
+export const normalizeNumber = (num: number, numberCountAfterComma = 1): number => {
+  const coefficient = 10 ** numberCountAfterComma;
+  return Math.round((num + Number.EPSILON) * coefficient) / coefficient;
+};

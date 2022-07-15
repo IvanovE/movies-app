@@ -7,14 +7,14 @@ import {
   useGetRecommendationsQuery,
   useGetMovieTeamQuery
 } from '../services/moviesEndpoints';
-import ageLimit from '../assets/ageLimit.png';
+import { ActorSliderWrapper } from '../components/Slider/Wrappers/ActorSliderWrapper';
+import { MovieSliderWrapper } from '../components/Slider/Wrappers/MovieSliderWrapper';
+import { ReviewsSection } from '../components/ReviewsSection';
 import { destructObjIntoArr } from '../utils/utils';
-import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { BREAKPOINTS } from '../theme/theme';
-import { ReviewsSection } from '../components/ReviewsSection';
-import { MovieSliderWrapper } from '../components/Slider/Wrappers/MovieSliderWrapper';
-import { ActorSliderWrapper } from '../components/Slider/Wrappers/ActorSliderWrapper';
+import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
+import ageLimit from '../assets/ageLimit.png';
 
 const styles = {
   container: {
@@ -39,7 +39,9 @@ const styles = {
   },
   poster: {
     maxW: '300px',
-    borderRadius: '4px'
+    borderRadius: '4px',
+    imageRendering: '-webkit-optimize-contrast',
+    aspectRatio: '2/3'
   },
   ageLimitPng: {
     position: 'absolute',
@@ -100,7 +102,7 @@ export const MovieDetails = () => {
   } = useGetMovieByIdQuery(id);
   const {
     data: movieRecommendations,
-    isLoading: isRecommendedMoviesLoading
+    isLoading: isMovieRecommendationsLoading
   } = useGetRecommendationsQuery(id);
   const {
     data: movieReviews,
@@ -120,15 +122,15 @@ export const MovieDetails = () => {
       properties)
     : [];
 
-  const recommendations = movieRecommendations?.results;
-  const reviews = movieReviews?.results;
-  const actors = movieTeam?.actors;
+  const { results: recommendations } = movieRecommendations || {};
+  const { results: reviews } = movieReviews || {};
+  const { actors } = movieTeam || {};
 
-  const shouldShowRecommendations = !!recommendations?.length;
+  const shouldShowRecommendations = !!recommendations?.length; // Todo !! works, boolean - not
   const shouldShowReviews = !!reviews?.length && !!movieReviews?.totalResults;
   const shouldShowActors = !!actors?.length;
 
-  const hasBackdrop = !!movieDetails?.backdrop;
+  const hasBackdrop = Boolean(movieDetails?.backdrop);
 
   return (
     <>
@@ -195,7 +197,7 @@ export const MovieDetails = () => {
         }
       </Skeleton>
 
-      <Skeleton isLoaded={!isRecommendedMoviesLoading}>
+      <Skeleton isLoaded={!isMovieRecommendationsLoading}>
         {shouldShowRecommendations &&
             <MovieSliderWrapper
               config={sliderConfig.recommendations}

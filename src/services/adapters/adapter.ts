@@ -13,6 +13,7 @@ import {
   IMG_URL_500,
   IMG_URL_ORIGINAL
 } from '../moviesEndpoints';
+import { normalizeNumber } from '../../utils/utils';
 import noImageAvailable from '../../assets/noImageAvailable.png';
 
 const transformStandardMovie = (movie: IStandardMovie) => {
@@ -24,7 +25,7 @@ const transformStandardMovie = (movie: IStandardMovie) => {
     overview: movie.overview,
     title: movie.title,
     release: movie.release_date,
-    rating: Math.round((movie.vote_average + Number.EPSILON) * 10) / 10 + ' / 10'
+    rating: normalizeNumber(movie.vote_average) + ' / 10'
   };
 };
 
@@ -36,7 +37,7 @@ const transformStandardActor = (actor: IStandardActor) => {
     knownForDepartment: actor.known_for_department,
     name: actor.name,
     originalName: actor.original_name,
-    popularity: actor.popularity + ' / 100',
+    popularity: normalizeNumber(actor.popularity) + ' / 100',
     poster: actor.profile_path ? IMG_URL_500 + actor.profile_path : noImageAvailable,
     castId: actor.cast_id,
     character: actor.character,

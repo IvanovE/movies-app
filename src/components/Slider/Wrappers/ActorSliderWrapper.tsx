@@ -1,8 +1,8 @@
-import { ITransformedActor } from '../../../services/adapters/types/transforms';
-import { Slider } from '../Slider';
-import { SwiperSlide } from 'swiper/react';
 import React from 'react';
+import { SwiperSlide } from 'swiper/react';
+import { Slider } from '../Slider';
 import { ActorCard } from '../../ActorCard';
+import { ITransformedActor } from '../../../services/adapters/types/transforms';
 
 type PropTypes = {
   config: {
