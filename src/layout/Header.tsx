@@ -103,18 +103,19 @@ export const Header = () => {
         </InputGroup>
         <Box display='flex' gap={2}>
           {isAuthenticated &&
-              navigationConfig.authorized.map((iconConf) => {
-                return <NavIcon key={iconConf.ariaLabel} {...iconConf} />;
-              })
+              navigationConfig.authorized.map((iconConf) => (
+                <NavIcon key={iconConf.ariaLabel} {...iconConf} />
+              ))
           }
           {!isAuthenticated &&
-              navigationConfig.notAuthorized.map((iconConf) => {
-                return <NavIcon key={iconConf.ariaLabel} {...iconConf} />;
-              })
+              navigationConfig.notAuthorized.map((iconConf) => (
+                <NavIcon key={iconConf.ariaLabel} {...iconConf} />
+              ))
           }
-          {navigationConfig.renderAnyway.map((iconConf) => {
-            return <NavIcon key={iconConf.ariaLabel} {...iconConf} />;
-          })}
+          {navigationConfig.renderAnyway.map((iconConf) => (
+            <NavIcon key={iconConf.ariaLabel} {...iconConf} />
+          ))
+          }
         </Box>
       </Container>
     </Box>

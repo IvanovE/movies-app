@@ -19,7 +19,7 @@ const styles = {
     padding: '.5rem .8rem',
     borderRadius: '4px',
     _hover: {
-      backgroundColor: 'cyan.600', // Todo
+      backgroundColor: 'cyan.600', // Todo Вынести в тему
       transition: '.3s ease'
     }
   },
@@ -144,8 +144,8 @@ export const Pagination = ({
 
         <ListItem
           onClick={onNext}
-          sx={currentPage === lastPage ?
-            styles.disabledArrow
+          sx={currentPage === lastPage
+            ? styles.disabledArrow
             : styles.activeArrow
           }
         >

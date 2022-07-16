@@ -7,7 +7,7 @@ const styles = {
   },
   toggle: {
     display: 'inline',
-    color: 'cyan.600',
+    color: 'cyan.600', // Todo Вынести в тему
     fontWeight: 'bold',
     cursor: 'pointer'
   }

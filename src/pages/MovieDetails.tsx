@@ -15,6 +15,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
 import { BREAKPOINTS } from '../theme/theme';
 import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
 import ageLimit from '../assets/ageLimit.png';
+import { BoxWithColorMode } from '../theme/components/CustomBox';
 
 const styles = {
   container: {
@@ -50,7 +51,7 @@ const styles = {
     width: '3rem'
   },
   description: {
-    background: 'rgba(255, 255, 255, .5)',
+    // background: 'rgba(255, 255, 255, .5)',
     padding: '1rem',
     borderRadius: '4px'
   },
@@ -160,7 +161,7 @@ export const MovieDetails = () => {
                 />
               }
             </Box>
-            <Box
+            <BoxWithColorMode
               sx={styles.description}
               width={isTablet ? '100%' : '50%'}
             >
@@ -172,7 +173,7 @@ export const MovieDetails = () => {
                   {field}
                 </Box>
               ))}
-            </Box>
+            </BoxWithColorMode>
           </Box>
         </Box>
         }

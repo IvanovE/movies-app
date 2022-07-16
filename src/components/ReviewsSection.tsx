@@ -5,13 +5,13 @@ import { ReadMore } from './ReadMore';
 import { ITransformedReviews } from '../services/adapters/types/transforms';
 import { normalizeDate } from '../utils/utils';
 import { useUpdatedEffect } from '../hooks/useUpdatedEffect';
+import { BoxWithColorMode } from '../theme/components/CustomBox';
 
 const styles = {
   container: {
-    border: '2px solid',
-    borderColor: 'cyan.600',
     borderRadius: '4px',
-    marginBottom: '2rem'
+    marginBottom: '2rem',
+    paddingY: '.5rem'
   },
   card: {
     padding: '1rem'
@@ -61,7 +61,7 @@ export const ReviewsSection = ({ results: movieReviews, totalResults, movieId }:
   const reviews = movieReviews.slice(REVIEWS_PER_PAGE * (currentPage - 1), REVIEWS_PER_PAGE * currentPage);
 
   return (
-    <Box sx={styles.container} ref={reviewSectionRef}>
+    <BoxWithColorMode sx={styles.container} ref={reviewSectionRef}>
       {reviews?.map((review) => (
         <Box key={review.id} sx={styles.card}>
           <Box sx={styles.heading}>
@@ -88,6 +88,6 @@ export const ReviewsSection = ({ results: movieReviews, totalResults, movieId }:
         onPageChange={onPageChange}
         pageSize={REVIEWS_PER_PAGE}
       />
-    </Box>
+    </BoxWithColorMode>
   );
 };
