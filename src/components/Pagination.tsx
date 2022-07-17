@@ -127,7 +127,7 @@ export const Pagination = ({
           return (
             <ListItemWithColorMode
               key={i}
-              variant='item'
+              variant='solid'
               onClick={() => onPageChange(Number(pageNumber))}
               sx={pageNumber === currentPage
                 ? styles.activeItem
@@ -141,7 +141,7 @@ export const Pagination = ({
 
         <ListItemWithColorMode
           onClick={onNext}
-          variant='arrow'
+          variant='ghost'
           sx={currentPage === lastPage
             ? styles.disabledArrow
             : styles.activeArrow

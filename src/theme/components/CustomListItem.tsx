@@ -9,14 +9,14 @@ import {
 
 export const CustomListItem: ComponentStyleConfig = {
   variants: {
-    arrow: {
+    ghost: {
       color: 'primary',
       _hover: {
         color: 'onHover',
         transition: '.3s ease'
       }
     },
-    item: {
+    solid: {
       _hover: {
         background: 'primary',
         transition: '.3s ease'
