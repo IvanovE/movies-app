@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
 import { Box, List, ListItem } from '@chakra-ui/react';
+import { ListItemWithColorMode } from '../theme/components/CustomListItem';
 
 const styles = {
   container: {
@@ -17,11 +18,7 @@ const styles = {
   item: {
     cursor: 'pointer',
     padding: '.5rem .8rem',
-    borderRadius: '4px',
-    _hover: {
-      backgroundColor: 'cyan.600', // Todo Вынести в тему
-      transition: '.3s ease'
-    }
+    borderRadius: '4px'
   },
   activeItem: {
     cursor: 'pointer',
@@ -31,8 +28,7 @@ const styles = {
   },
   activeArrow: {
     cursor: 'pointer',
-    padding: '.5rem .8rem',
-    color: 'cyan.600'
+    padding: '.5rem .8rem'
   },
   disabledArrow: {
     cursor: 'not-allowed',
@@ -129,8 +125,9 @@ export const Pagination = ({
             return <ListItem key={i}>&#8230;</ListItem>;
           }
           return (
-            <ListItem
+            <ListItemWithColorMode
               key={i}
+              variant='item'
               onClick={() => onPageChange(Number(pageNumber))}
               sx={pageNumber === currentPage
                 ? styles.activeItem
@@ -138,19 +135,20 @@ export const Pagination = ({
               }
             >
               {pageNumber}
-            </ListItem>
+            </ListItemWithColorMode>
           );
         })}
 
-        <ListItem
+        <ListItemWithColorMode
           onClick={onNext}
+          variant='arrow'
           sx={currentPage === lastPage
             ? styles.disabledArrow
             : styles.activeArrow
           }
         >
           <RiArrowRightSLine/>
-        </ListItem>
+        </ListItemWithColorMode>
       </List>
     </Box>
   );

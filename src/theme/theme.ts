@@ -1,6 +1,9 @@
-import { ComponentStyleConfig, extendTheme } from '@chakra-ui/react';
+import { extendTheme } from '@chakra-ui/react';
 import { Button } from './components/Button';
 import { CustomBox } from './components/CustomBox';
+import { Text } from './components/Text';
+import { CustomListItem } from './components/CustomListItem';
+import { colors } from './colors/colors';
 
 const THEME_BREAKPOINTS = {
   xs: '0',
@@ -12,25 +15,15 @@ const THEME_BREAKPOINTS = {
 
 type TBreakpoints = keyof typeof THEME_BREAKPOINTS
 
-export const ListItem: ComponentStyleConfig = {
-  baseStyle: ({ colorMode }) => ({
-    _hover: colorMode === 'light'
-      ? {
-        background: 'cyan.400',
-        transition: '.3s ease'
-      }
-      : {
-        background: 'cyan.800',
-        transition: '.3s ease'
-      }
-  })
-};
-
 export const theme = extendTheme({
+  semanticTokens: {
+    colors
+  },
   components: {
     Button,
-    CustomBox,
-    ListItem
+    Text,
+    CustomListItem,
+    CustomBox
   },
   breakpoints: THEME_BREAKPOINTS
 });

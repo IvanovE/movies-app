@@ -3,9 +3,6 @@ import {
   Box,
   Container,
   Heading,
-  Input,
-  InputGroup,
-  InputLeftElement,
   useColorMode,
   useColorModeValue
 } from '@chakra-ui/react';
@@ -14,13 +11,36 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import { MdFavorite } from 'react-icons/md';
 import { RiPlayList2Fill } from 'react-icons/ri';
 import { GoSignIn } from 'react-icons/go';
-import { AiOutlineSearch } from 'react-icons/ai';
 import { ImExit } from 'react-icons/im';
-import { text } from '../constants/text';
+import { SearchBar } from '../components/SearchBar';
 import { NavIcon } from '../components/NavIcon';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { logout } from '../store/slices/authSlice';
 import { auth } from '../store/selectors/selectors';
+import { text } from '../constants/text';
+
+const styles = {
+  header: {
+    width: '100%',
+    position: 'sticky',
+    background: 'primary',
+    paddingY: 4,
+    top: 0,
+    zIndex: 999
+  },
+  container: {
+    maxWidth: 'container.xl',
+    display: 'flex'
+  },
+  title: {
+    size: 'lg',
+    marginRight: 6
+  },
+  icons: {
+    display: 'flex',
+    gap: 2
+  }
+};
 
 const pathsToRedirect = [
   '/favourites',
@@ -32,7 +52,6 @@ export const Header = () => {
   const history = useHistory<History>();
   const { toggleColorMode } = useColorMode();
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
-  const bg = useColorModeValue('cyan.600', 'cyan.900');
 
   const signOut = () => {
     const { pathname } = history.location;
@@ -82,26 +101,15 @@ export const Header = () => {
   };
 
   return (
-    <Box w='100%' position='sticky' bg={bg} py={4} top={0} zIndex={999}>
-      <Container maxW='container.xl' display='flex'>
+    <Box sx={styles.header}>
+      <Container sx={styles.container}>
         <Link to='/'>
-          <Heading as='h2' size='lg' mr={6}>{text.name}</Heading>
+          <Heading as='h2' sx={styles.title}>
+            {text.name}
+          </Heading>
         </Link>
-        <InputGroup mr={4}>
-          <InputLeftElement
-            pointerEvents='none'
-            fontSize='1.2em'
-            p={2}
-          >
-            <AiOutlineSearch />
-          </InputLeftElement>
-          <Input
-            placeholder='Search...'
-            _placeholder={{ color: 'white' }}
-            color='white'
-          />
-        </InputGroup>
-        <Box display='flex' gap={2}>
+        <SearchBar />
+        <Box sx={styles.icons}>
           {isAuthenticated &&
               navigationConfig.authorized.map((iconConf) => (
                 <NavIcon key={iconConf.ariaLabel} {...iconConf} />

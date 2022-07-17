@@ -9,8 +9,7 @@ import {
 
 export const CustomBox: ComponentStyleConfig = {
   baseStyle:  ({ colorMode }) => ({
-    background: colorMode === 'light' ? 'rgba(211, 211, 211, .5)' : 'rgba(0, 0, 0, .5)',
-    color: colorMode === 'light' ? 'black' : 'white'
+    background: colorMode === 'light' ? 'rgba(211, 211, 211, .5)' : 'rgba(0, 0, 0, .5)'
   })
 };
 

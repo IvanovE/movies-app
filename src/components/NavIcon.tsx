@@ -2,6 +2,14 @@ import React from 'react';
 import { IconButton, Tooltip } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
+const styles = {
+  icon: {
+    _focus: {
+      ring: 0
+    }
+  }
+};
+
 type PropTypes = {
   label: string
   ariaLabel: string
@@ -28,6 +36,7 @@ export const NavIcon = ({
             onClick={onClick}
             icon={icon}
             variant='solid'
+            sx={styles.icon}
           />
         </Link>
       </Tooltip>
@@ -38,6 +47,7 @@ export const NavIcon = ({
           onClick={onClick}
           icon={icon}
           variant='solid'
+          sx={styles.icon}
         />
       </Tooltip>
   );

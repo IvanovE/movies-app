@@ -51,7 +51,6 @@ const styles = {
     width: '3rem'
   },
   description: {
-    // background: 'rgba(255, 255, 255, .5)',
     padding: '1rem',
     borderRadius: '4px'
   },
@@ -127,7 +126,7 @@ export const MovieDetails = () => {
   const { results: reviews } = movieReviews || {};
   const { actors } = movieTeam || {};
 
-  const shouldShowRecommendations = !!recommendations?.length; // Todo !! works, boolean - not
+  const shouldShowRecommendations = !!recommendations?.length; // Boolean(...) crash ts, ts bug?
   const shouldShowReviews = !!reviews?.length && !!movieReviews?.totalResults;
   const shouldShowActors = !!actors?.length;
 
@@ -165,7 +164,7 @@ export const MovieDetails = () => {
               sx={styles.description}
               width={isTablet ? '100%' : '50%'}
             >
-              <Heading sx={styles.title}>
+              <Heading sx={styles.title} colorScheme='lightTheme'>
                 {movieDetails.title}
               </Heading>
               {movieDescription?.map((field, index) => (

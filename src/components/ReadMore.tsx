@@ -7,7 +7,6 @@ const styles = {
   },
   toggle: {
     display: 'inline',
-    color: 'cyan.600', // Todo Вынести в тему
     fontWeight: 'bold',
     cursor: 'pointer'
   }
@@ -29,7 +28,11 @@ export const ReadMore = ({ text }: {text: string}) => {
           <Text sx={styles.text}>
             {isReadMore ? text.slice(0, 400) + '...' : text}
           </Text>
-          <Text onClick={toggleReadMore} sx={styles.toggle}>
+          <Text
+            variant='withColorMode'
+            onClick={toggleReadMore}
+            sx={styles.toggle}
+          >
             {isReadMore ? 'Read more' : ' Show less'}
           </Text>
         </>
