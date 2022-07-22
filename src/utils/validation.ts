@@ -15,5 +15,3 @@ export const usernameValidation = {
 export const passwordConfirmValidation = {
   required: true
 };
-
-

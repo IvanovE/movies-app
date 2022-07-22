@@ -13,7 +13,7 @@ type PropTypes = {
   size: string
 }
 
-const sx = {
+const styles = {
   container: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -23,7 +23,7 @@ const sx = {
 
 export const CircularProgressBar = ({ value, text, color, size }: PropTypes) => {
   return (
-    <Flex sx={sx.container}>
+    <Flex sx={styles.container}>
       <CircularProgress value={value} color={color} size={size}>
         <CircularProgressLabel>{value}%</CircularProgressLabel>
       </CircularProgress>

@@ -7,8 +7,9 @@ import { SignUp } from './pages/SignUp';
 import { Catalog } from './pages/Catalog';
 import { useAppDispatch } from './store/store';
 import { initApp } from './store/slices/appSlice';
-import { MovieGroup } from './pages/MovieGroup';
+import { MovieCategory } from './pages/MovieCategory';
 import { MovieDetails } from './pages/MovieDetails';
+import { ScrollToTop } from './layout/ScrollToTop';
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -16,16 +17,18 @@ export function App() {
 
   return (
     <Router>
-      <Layout>
-        <Switch>
-          <Route exact path='/' component={Welcome} />
-          <Route path='/sign-in' component={SignIn} />
-          <Route path='/sign-up' component={SignUp} />
-          <Route exact path='/catalog' component={Catalog} />
-          <Route exact path='/catalog/:list/:page' component={MovieGroup} />
-          <Route exact path='/catalog/:list/:page/:id' component={MovieDetails} />
-        </Switch>
-      </Layout>
+      <ScrollToTop>
+        <Layout>
+          <Switch>
+            <Route exact path='/' component={Welcome} />
+            <Route path='/sign-in' component={SignIn} />
+            <Route path='/sign-up' component={SignUp} />
+            <Route exact path='/catalog' component={Catalog} />
+            <Route exact path='/catalog/:list/:page' component={MovieCategory} />
+            <Route exact path='/movie/:id' component={MovieDetails} />
+          </Switch>
+        </Layout>
+      </ScrollToTop>
     </Router>
   );
 }

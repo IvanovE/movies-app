@@ -27,7 +27,7 @@ const defaultValues: FormData = {
   confirmPassword: ''
 };
 
-const sx = {
+const styles = {
   title: {
     textAlign: 'center',
     marginY: '2rem'
@@ -91,7 +91,7 @@ export const SignUp = () => {
 
   return (
     <Container>
-      <Text fontSize='2xl' sx={sx.title}>{text.signUp}</Text>
+      <Text fontSize='2xl' sx={styles.title}>{text.signUp}</Text>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Stack spacing={3}>
           <Controller 
@@ -102,13 +102,13 @@ export const SignUp = () => {
               <Input
                 variant='outline'
                 placeholder='Email'
-                sx={errors.email && sx.inputError}
+                sx={errors.email && styles.inputError}
                 {...field}
               />
             }
           />
           {errors?.email &&
-          <Box sx={sx.textError}>
+          <Box sx={styles.textError}>
             {errors.email?.type === 'required' && text.emailRequiredError}
             {errors.email?.type === 'pattern' && text.emailPatternError}
           </Box>
@@ -122,13 +122,13 @@ export const SignUp = () => {
               <Input
                 variant='outline'
                 placeholder='Username'
-                sx={errors.username && sx.inputError}
+                sx={errors.username && styles.inputError}
                 {...field}
               />
             }
           />
           {errors?.username &&
-            <Box sx={sx.textError}>
+            <Box sx={styles.textError}>
               {errors.username?.type === 'required' && text.usernameRequiredError}
             </Box>
           }
@@ -142,13 +142,13 @@ export const SignUp = () => {
                 variant='outline'
                 type='password'
                 placeholder='Password'
-                sx={errors.password && sx.inputError}
+                sx={errors.password && styles.inputError}
                 {...field}
               />
             }
           />
           {errors?.password &&
-            <Box sx={sx.textError}>
+            <Box sx={styles.textError}>
               {errors.password?.type === 'required' && text.passwordRequiredError}
               {errors.password?.type === 'minLength' && text.passwordMinLengthError}
             </Box>
@@ -163,13 +163,13 @@ export const SignUp = () => {
                 variant='outline'
                 placeholder='Confirm password'
                 type='password'
-                sx={errors.confirmPassword && sx.inputError}
+                sx={errors.confirmPassword && styles.inputError}
                 {...field}
               />
             }
           />
           {errors.confirmPassword &&
-            <Box sx={sx.textError}>
+            <Box sx={styles.textError}>
               {errors.confirmPassword?.type === 'required' && text.confirmationRequiredError}
               {errors.confirmPassword?.type === 'passwordMismatch' && text.passwordMismatchError}
             </Box>
@@ -180,8 +180,8 @@ export const SignUp = () => {
           </Button>
         </Stack>
       </form>
-      <Text sx={sx.redirect}>
-        {text.haveAccount} <Link style={sx.link} to={'/sign-in'}>{text.signIn}</Link>
+      <Text sx={styles.redirect}>
+        {text.haveAccount} <Link style={styles.link} to={'/sign-in'}>{text.signIn}</Link>
       </Text>
     </Container>
   );
