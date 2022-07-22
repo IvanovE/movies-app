@@ -17,7 +17,7 @@ export const ScrollToTop = withRouter(({ history, children }: propsType) => {
     return () => {
       unListen();
     };
-  }, [history,]);
+  }, [history]);
 
   return (
     <>

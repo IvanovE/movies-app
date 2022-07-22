@@ -45,12 +45,12 @@ interface PropTypes extends ITransformedReviews {
 }
 
 export const ReviewsSection = ({ results: movieReviews, totalResults, movieId }: PropTypes) => {
-  const [currentPage, setCurrentPage,] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const reviewSectionRef = useRef<HTMLDivElement>(null);
 
   useUpdatedEffect(
     () => setCurrentPage(1),
-    [movieId,]
+    [movieId]
   );
 
   const onPageChange = (page: number) => {

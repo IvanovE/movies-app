@@ -53,7 +53,7 @@ module.exports = {
     ],
     'comma-dangle': [
       'error', {
-        'arrays': 'always',
+        'arrays': 'never',
         'objects': 'never',
         'imports': 'never',
         'exports': 'never',

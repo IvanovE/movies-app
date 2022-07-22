@@ -43,7 +43,7 @@ const styles = {
 };
 
 const pathsToRedirect = [
-  '/favourites',
+  '/favourites'
 ];
 
 export const Header = () => {
@@ -74,7 +74,7 @@ export const Header = () => {
         ariaLabel: 'sign-out',
         icon: <ImExit />,
         onClick: signOut
-      },
+      }
     ],
     notAuthorized: [
       {
@@ -82,7 +82,7 @@ export const Header = () => {
         ariaLabel: 'sign-in',
         icon: <GoSignIn />,
         linkTo: '/sign-in'
-      },
+      }
     ],
     renderAnyway: [
       {
@@ -96,7 +96,7 @@ export const Header = () => {
         ariaLabel: 'color-mode',
         icon: <SwitchIcon />,
         onClick: toggleColorMode
-      },
+      }
     ]
   };
 

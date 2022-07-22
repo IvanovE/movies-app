@@ -78,7 +78,7 @@ export const Pagination = ({
     if (!shouldShowLeftDots && shouldShowRightDots) {
       const leftItemCount = 3 + 2 * siblingCount;
       const leftRange = range(1, leftItemCount);
-      return [...leftRange, DOTS, totalPageCount,];
+      return [...leftRange, DOTS, totalPageCount];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
@@ -87,15 +87,15 @@ export const Pagination = ({
         totalPageCount - rightItemCount + 1,
         totalPageCount
       );
-      return [firstPageIndex, DOTS, ...rightRange,];
+      return [firstPageIndex, DOTS, ...rightRange];
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex,];
+      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
     }
     return [];
-  }, [totalCount, pageSize, siblingCount, currentPage,]);
+  }, [totalCount, pageSize, siblingCount, currentPage]);
 
   const onNext = () => onPageChange(currentPage + 1);
 

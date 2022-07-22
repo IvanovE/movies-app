@@ -13,10 +13,10 @@ const styles = {
 };
 
 export const ReadMore = ({ text }: {text: string}) => {
-  const [isReadMore, setIsReadMore,] = useState(true);
+  const [isShowMore, setIsShowMore] = useState(true);
 
   const toggleReadMore = () => {
-    setIsReadMore((isReadMore) => !isReadMore);
+    setIsShowMore((isReadMore) => !isReadMore);
   };
 
   const shouldShowMore = text.length > 400;
@@ -26,14 +26,14 @@ export const ReadMore = ({ text }: {text: string}) => {
       {shouldShowMore &&
         <>
           <Text sx={styles.text}>
-            {isReadMore ? text.slice(0, 400) + '...' : text}
+            {isShowMore ? text.slice(0, 400) + '...' : text}
           </Text>
           <Text
             variant='withColorMode'
             onClick={toggleReadMore}
             sx={styles.toggle}
           >
-            {isReadMore ? 'Read more' : ' Show less'}
+            {isShowMore ? 'Read more' : ' Show less'}
           </Text>
         </>
       }

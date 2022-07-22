@@ -61,7 +61,7 @@ export const Slider = ({ title, link, linkText, delay, data }: PropTypes) => (
       }
     </Box>
     <Swiper
-      modules={[Navigation, Scrollbar, Lazy, Autoplay,]}
+      modules={[Navigation, Scrollbar, Lazy, Autoplay]}
       spaceBetween={30}
       navigation
       lazy

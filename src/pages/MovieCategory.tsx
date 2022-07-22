@@ -27,10 +27,12 @@ type QueryParamTypes = {
 export const MovieCategory = () => {
   const { list, page: strPage } = useParams<QueryParamTypes>();
   const page = Number(strPage);
-  const [currentPage, setCurrentPage,] = useState(page);
+  const [currentPage, setCurrentPage] = useState(page);
   const history = useHistory();
   const { data, isLoading } = useGetMoviesQuery({ list, page });
   const { results: movies } = data || {};
+
+  const shouldShowPagination = !!data?.totalResults && movies && movies.length > 20;
 
   const onPageChange = (page: number): void => {
     setCurrentPage(page);
@@ -69,7 +71,7 @@ export const MovieCategory = () => {
           }
         </SimpleGrid>
       </Skeleton>
-      {data?.totalResults &&
+      {shouldShowPagination &&
         <Pagination
           totalCount={data.totalResults}
           currentPage={currentPage}

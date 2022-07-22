@@ -10,12 +10,12 @@ import {
 import { ActorSliderWrapper } from '../components/Slider/Wrappers/ActorSliderWrapper';
 import { MovieSliderWrapper } from '../components/Slider/Wrappers/MovieSliderWrapper';
 import { ReviewsSection } from '../components/ReviewsSection';
-import { destructObjIntoArr } from '../utils/utils';
+import { getMovieDescription } from '../utils/utils';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { BoxWithColorMode } from '../theme/components/CustomBox';
 import { BREAKPOINTS } from '../theme/theme';
 import { ITransformedMovieDetails } from '../services/adapters/types/transforms';
 import ageLimit from '../assets/ageLimit.png';
-import { BoxWithColorMode } from '../theme/components/CustomBox';
 
 const styles = {
   container: {
@@ -72,7 +72,7 @@ const properties: Array<keyof ITransformedMovieDetails> = [
   'companies',
   'countries',
   'release',
-  'status',
+  'status'
 ];
 
 const sliderConfig = {
@@ -117,9 +117,7 @@ export const MovieDetails = () => {
   const isTablet = useMediaQuery(BREAKPOINTS.md);
 
   const movieDescription = movieDetails
-    ? destructObjIntoArr(
-      movieDetails,
-      properties)
+    ? getMovieDescription(movieDetails, properties)
     : [];
 
   const { results: recommendations } = movieRecommendations || {};
