@@ -32,7 +32,7 @@ export const MovieCategory = () => {
   const { data, isLoading } = useGetMoviesQuery({ list, page });
   const { results: movies } = data || {};
 
-  const shouldShowPagination = !!data?.totalResults && movies && movies.length > 20;
+  const shouldShowPagination = !!data?.totalResults;
 
   const onPageChange = (page: number): void => {
     setCurrentPage(page);
